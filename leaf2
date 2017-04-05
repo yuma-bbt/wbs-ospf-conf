@@ -1,0 +1,36 @@
+
+hostname cumulus
+
+interface lo
+
+interface eth0
+  address dhcp
+
+interface swp1
+  address 192.168.1.2/24
+  ip ospf hello-interval 5
+  ip ospf network point-to-point
+
+interface swp2
+
+interface swp4
+  address 192.168.4.1/24
+
+username cumulus nopassword
+
+service integrated-vtysh-config
+
+log file /var/log/quagga/quagga.log
+
+log timestamp precision 6
+
+router ospf
+  ospf router-id 0.0.0.2
+  redistribute connected
+  passive-interface swp1
+  passive-interface swp2
+  passive-interface swp4
+  network 192.168.1.0/24 area 0.0.0.0
+  network 192.168.4.0/24 area 0.0.0.0
+
+line vty
