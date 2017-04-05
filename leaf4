@@ -26,8 +26,6 @@ log timestamp precision 6
 router ospf
   ospf router-id 0.0.0.4
   redistribute connected
-  passive-interface swp3
-  passive-interface swp4
   network 192.168.3.0/24 area 0.0.0.0
   network 192.168.4.0/24 area 0.0.0.0
 
